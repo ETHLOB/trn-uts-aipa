@@ -701,7 +701,6 @@ def overview_tab(profile: dict, metrics: pd.DataFrame) -> None:
     with st.expander("Detailed Report Tables"):
         table_choice = st.radio(
             "Detailed table choice",
-            ["Final test metrics", "Per-language metrics", "Per-class F1"],
             ["Final test metrics", "Transformer benchmark", "Per-language metrics", "Per-class F1"],
             horizontal=True,
             label_visibility="collapsed",
