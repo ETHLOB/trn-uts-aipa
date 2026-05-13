@@ -146,6 +146,12 @@ models/*
 *.hdf5
 *.h5
 *.parquet
+<<<<<<< HEAD
+=======
+*.csv
+*.pptx
+*.ppt
+>>>>>>> origin/main
 
 # Keep reusable report/evaluation outputs in version control.
 !data/raw/.gitkeep

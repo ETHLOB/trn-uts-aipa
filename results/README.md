@@ -19,8 +19,17 @@ Extra generated tables:
 ```text
 results/per_class_f1.csv
 results/per_language_metrics.csv
+<<<<<<< HEAD
 ```
 
+=======
+results/transformer_embedding_benchmark.csv
+results/transformer_embedding_benchmark.json
+```
+
+The transformer embedding benchmark is optional and sampled. It compares multilingual semantic embeddings with a simple supervised classifier, so it should be interpreted cautiously against the full-data TF-IDF results.
+
+>>>>>>> origin/main
 Related presentation/report figures are saved in `report_assets/`.
 
 Use validation results for model selection. Use test results for final report claims.

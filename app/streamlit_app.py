@@ -115,6 +115,7 @@ def inject_style() -> None:
             border-radius: 8px;
             padding: 1.15rem;
             margin: 0.75rem 0;
+<<<<<<< HEAD
 
             height: 170px;              /*  force equal height */
             display: flex;              /*  enable layout control */
@@ -122,6 +123,9 @@ def inject_style() -> None:
             justify-content: space-between;
 
             overflow-y: auto;           /* prevents overflow */
+=======
+            box-shadow: 0 12px 28px rgba(0, 0, 0, 0.18);
+>>>>>>> origin/main
         }
         .mini-card-title {
             color: #f7fbff;
@@ -134,7 +138,11 @@ def inject_style() -> None:
         }
         .workflow-row {
             display: grid;
+<<<<<<< HEAD
             grid-template-columns: repeat(8, minmax(112px, 1fr));
+=======
+            grid-template-columns: repeat(7, minmax(112px, 1fr));
+>>>>>>> origin/main
             gap: 0.65rem;
             margin: 0.9rem 0 1.2rem 0;
         }
@@ -391,8 +399,12 @@ def load_models():
 
 
 def load_metrics() -> pd.DataFrame:
+<<<<<<< HEAD
     from pathlib import Path
     metrics_path = Path(__file__).parent.parent / "results" / "metrics_summary.csv"
+=======
+    metrics_path = RESULTS_DIR / "metrics_summary.csv"
+>>>>>>> origin/main
     return pd.read_csv(metrics_path) if metrics_path.exists() else pd.DataFrame()
 
 
@@ -471,7 +483,11 @@ def bar_chart(
         return
 
     encoding = {
+<<<<<<< HEAD
         "x": alt.X(f"{x}:N", sort=sort, axis=alt.Axis(labelAngle=-45, labelLimit=200)),
+=======
+        "x": alt.X(f"{x}:N", sort=sort, axis=alt.Axis(labelAngle=-30)),
+>>>>>>> origin/main
         "y": alt.Y(f"{y}:Q"),
         "tooltip": list(data.columns),
     }
@@ -489,6 +505,7 @@ def bar_chart(
     st.altair_chart(chart_theme(chart), use_container_width=True)
 
 
+<<<<<<< HEAD
 def chart_card(title: str, data: pd.DataFrame, x: str, y: str, color: str | None = None, height: int = 300, sort: str | list | None = "-y") -> None:
     with st.container(border=True):
         st.markdown(f"<div class='chart-title'>{title}</div>", unsafe_allow_html=True)
@@ -535,12 +552,25 @@ def clean_explanation_terms(terms, max_terms=5):
 
     return clean
 
+=======
+def chart_card(title: str, data: pd.DataFrame, x: str, y: str, color: str | None = None, height: int = 300) -> None:
+    """Render a chart inside a bordered dashboard panel."""
+    with st.container(border=True):
+        st.markdown(f"<div class='chart-title'>{title}</div>", unsafe_allow_html=True)
+        bar_chart(data, x, y, title="", color=color, height=height)
+
+
+>>>>>>> origin/main
 def render_result(result: dict) -> None:
     result_items = [
         ("Predicted queue", result["category"]),
         ("Predicted priority", result["priority"]),
         ("Recommended team", result["recommended_team"]),
+<<<<<<< HEAD
         ("Escalation", "High risk — review required" if result["escalation_required"] else "Low risk — no escalation"),
+=======
+        ("Escalation", "Required" if result["escalation_required"] else "Not required"),
+>>>>>>> origin/main
     ]
     columns = st.columns(4)
     for column, (label, value) in zip(columns, result_items):
@@ -557,6 +587,7 @@ def render_result(result: dict) -> None:
 
     col1, col2 = st.columns([1.05, 0.95])
     with col1:
+<<<<<<< HEAD
         st.markdown("#### Ticket Summary")
         st.markdown(f"<div class='section-card'>{result['summary']}</div>", unsafe_allow_html=True)
     with col2:
@@ -565,6 +596,14 @@ def render_result(result: dict) -> None:
         priority_terms_list = clean_explanation_terms(result["priority_explanation_terms"])
         category_terms = ", ".join(category_terms_list) or "No meaningful terms available"
         priority_terms = ", ".join(priority_terms_list) or "No meaningful terms available"
+=======
+        st.markdown("#### Summary")
+        st.markdown(f"<div class='section-card'>{result['summary']}</div>", unsafe_allow_html=True)
+    with col2:
+        st.markdown("#### Explanation Terms")
+        category_terms = ", ".join(term for term, _ in result["category_explanation_terms"]) or "No terms available"
+        priority_terms = ", ".join(term for term, _ in result["priority_explanation_terms"]) or "No terms available"
+>>>>>>> origin/main
         st.markdown(
             f"""
             <div class="section-card">
@@ -575,6 +614,10 @@ def render_result(result: dict) -> None:
             unsafe_allow_html=True,
         )
 
+<<<<<<< HEAD
+=======
+
+>>>>>>> origin/main
 def render_workflow() -> None:
     """Render a one-line project workflow."""
     st.markdown(
@@ -583,11 +626,18 @@ def render_workflow() -> None:
             <div class="workflow-step"><div class="workflow-icon">📁</div><div class="workflow-title">Audit Data</div><div class="workflow-copy">Inspect all 5 Kaggle CSV files.</div></div>
             <div class="workflow-step"><div class="workflow-icon">🧹</div><div class="workflow-title">Prepare Text</div><div class="workflow-copy">Merge, deduplicate, clean, and mask text.</div></div>
             <div class="workflow-step"><div class="workflow-icon">🔎</div><div class="workflow-title">Build Features</div><div class="workflow-copy">TF-IDF text plus safe metadata tokens.</div></div>
+<<<<<<< HEAD
             <div class="workflow-step"><div class="workflow-icon">🧠</div><div class="workflow-title">Train Models</div><div class="workflow-copy">Compare LR, SVM, Naive Bayes, and MLP neural network.</div></div>
             <div class="workflow-step"><div class="workflow-icon">📊</div><div class="workflow-title">Evaluate</div><div class="workflow-copy">Macro F1, confusion matrices, language checks.</div></div>
             <div class="workflow-step"><div class="workflow-icon">🧭</div><div class="workflow-title">Route</div><div class="workflow-copy">Recommend team and escalation review.</div></div>
             <div class="workflow-step"><div class="workflow-icon">💬</div><div class="workflow-title">Explain</div><div class="workflow-copy">Show summaries and influential terms.</div></div>
             <div class="workflow-step"><div class="workflow-icon">🤖</div><div class="workflow-title">RL Route</div><div class="workflow-copy">Q-learning agent learns optimal routing policy.</div></div>
+=======
+            <div class="workflow-step"><div class="workflow-icon">🧠</div><div class="workflow-title">Train Models</div><div class="workflow-copy">Compare baseline NLP classifiers.</div></div>
+            <div class="workflow-step"><div class="workflow-icon">📊</div><div class="workflow-title">Evaluate</div><div class="workflow-copy">Macro F1, confusion matrices, language checks.</div></div>
+            <div class="workflow-step"><div class="workflow-icon">🧭</div><div class="workflow-title">Route</div><div class="workflow-copy">Recommend team and escalation review.</div></div>
+            <div class="workflow-step"><div class="workflow-icon">💬</div><div class="workflow-title">Explain</div><div class="workflow-copy">Show summaries and influential terms.</div></div>
+>>>>>>> origin/main
         </div>
         """,
         unsafe_allow_html=True,
@@ -607,8 +657,11 @@ def overview_tab(profile: dict, metrics: pd.DataFrame) -> None:
             <span class="pill">Routing rules</span>
             <span class="pill">Escalation support</span>
             <span class="pill">Explainable AI</span>
+<<<<<<< HEAD
             <span class="pill">Neural Network (MLP)</span>
             <span class="pill">Reinforcement Learning</span>
+=======
+>>>>>>> origin/main
             <br><br>
             <p>
                 A decision-support system for first-pass customer support triage: predict the queue,
@@ -631,8 +684,11 @@ def overview_tab(profile: dict, metrics: pd.DataFrame) -> None:
     c2.metric("Compatible CSVs", files_used)
     c3.metric("Duplicates removed", f"{duplicates:,}")
     c4.metric("Best test macro F1", f"{best_macro:.3f}" if best_macro else "N/A")
+<<<<<<< HEAD
     
     
+=======
+>>>>>>> origin/main
 
     st.markdown("### AI Workflow")
     render_workflow()
@@ -656,6 +712,10 @@ def overview_tab(profile: dict, metrics: pd.DataFrame) -> None:
     frame = load_model_ready_data()
     per_language = load_optional_csv("per_language_metrics.csv")
     per_class = load_optional_csv("per_class_f1.csv")
+<<<<<<< HEAD
+=======
+    transformer_benchmark = load_optional_csv("transformer_embedding_benchmark.csv")
+>>>>>>> origin/main
 
     left, right = st.columns(2)
     with left:
@@ -668,6 +728,7 @@ def overview_tab(profile: dict, metrics: pd.DataFrame) -> None:
             chart_card("Priority Distribution", priority_counts, "priority", "tickets", height=280)
 
     left, right = st.columns(2)
+<<<<<<< HEAD
     
     with left:
         if not metrics.empty:
@@ -696,6 +757,14 @@ def overview_tab(profile: dict, metrics: pd.DataFrame) -> None:
                 st.altair_chart(chart_theme(chart))
     
     
+=======
+    with left:
+        chart_sources = [data for data in [metrics, transformer_benchmark] if not data.empty]
+        if chart_sources:
+            chart_data = pd.concat(chart_sources, ignore_index=True)
+            chart_data = chart_data.assign(label=chart_data["task"] + " | " + chart_data["model"] + " | " + chart_data["split"])
+            chart_card("Model Comparison by Macro F1", chart_data, "label", "macro_f1", color="task", height=330)
+>>>>>>> origin/main
     with right:
         if not per_language.empty:
             chart_card("Macro F1 by Language", per_language, "language", "macro_f1", color="task", height=330)
@@ -703,12 +772,21 @@ def overview_tab(profile: dict, metrics: pd.DataFrame) -> None:
     with st.expander("Detailed Report Tables"):
         table_choice = st.radio(
             "Detailed table choice",
+<<<<<<< HEAD
             ["Final test metrics", "Per-language metrics", "Per-class F1"],
+=======
+            ["Final test metrics", "Transformer benchmark", "Per-language metrics", "Per-class F1"],
+>>>>>>> origin/main
             horizontal=True,
             label_visibility="collapsed",
         )
         if table_choice == "Final test metrics":
             render_dark_table(metrics[metrics["split"] == "test"] if not metrics.empty else pd.DataFrame())
+<<<<<<< HEAD
+=======
+        elif table_choice == "Transformer benchmark":
+            render_dark_table(transformer_benchmark)
+>>>>>>> origin/main
         elif table_choice == "Per-language metrics":
             render_dark_table(per_language)
         else:
